@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./styles/style.css">
+  <title>Document</title>
+  <script type="module" src="./index.js"></script>
+</head>
+<body>
+  <main>
+    <form method="POST" id="send-order" class="send-order--form">
+      <label for="category">Categoría:</label>
+      <select class="inputs-container--category" name="category" id="category">
+        <option value selected disabled hidden>Seleccionar...</option>
+      </select>
+    
+      <label for="category">Desde:</label>
+      <select class="inputs-container--from-number" name="from-number" id="from-number">
+      </select>
+    
+      <label for="category">Hasta:</label>
+      <select class="inputs-container--to-number" name="to-number" id="to-number">
+      </select>
+
+      <label for="amount">Cantidad:</label>
+      <input type="number" id="amount" min="1"/>
+
+      <button type="button" id="add-order">Agregar</button>
+      
+      <ul id="total-order">        
+      </ul>
+
+      <button type="submit">Enviar Pedido</button>
+    </form>
+  </main>
+</body>
+</html>
