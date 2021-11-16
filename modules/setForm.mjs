@@ -50,7 +50,21 @@ export function setSelects(products) {
   })
 }
 
-export function setButtons(totalOrder, products) {
+export function setUlListener(totalOrder) {
+  const totalOrderUl = DOM.get("ul#total-order")
+  
+  totalOrderUl.addEventListener("click", ({target}) => {
+    const isTargetLi = target.tagName == "LI"
+    if(isTargetLi == false) return;
+    
+    const productIndex = totalOrder.findIndex(product => product.keyName === target.dataset.keyName)
+    totalOrder.splice(productIndex, 1)
+    
+    DOM.removeElement(target)
+  })
+}
+
+export function setAddButton(totalOrder, products) {
   const addOrderBtt = DOM.get("button#add-order")
 
   //print product on ul
@@ -94,16 +108,23 @@ export function setButtons(totalOrder, products) {
   })
 }
 
-export function setUlListener(totalOrder) {
-  const totalOrderUl = DOM.get("ul#total-order")
+export function setSubmitForm(totalOrder, phoneNumber) {
+  const form = document.querySelector("form#send-order-form")
+  
+  form.addEventListener("submit", ({target}) => {
+    let message = 
+      `Cliente: Marcelo Temporal \nVendedor: 5 \nPedido: \n\n`
 
-  totalOrderUl.addEventListener("click", ({target}) => {
-    const isTargetLi = target.tagName == "LI"
-    if(isTargetLi == false) return;
+    for(const order of totalOrder) {
+      const { keyName, amount} = order
+      const text = `${keyName.toUpperCase()}: ${amount} unds. \n`
+      message += text
+    }
+ 
+    const encodedMessage = encodeURI(message)
+    const startedLink = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=`
+    const url = `${startedLink}${encodedMessage}`
 
-    const productIndex = totalOrder.findIndex(product => product.keyName === target.dataset.keyName)
-    totalOrder.splice(productIndex, 1)
-
-    DOM.removeElement(target)
+    window.open(url, '_blank')
   })
 }

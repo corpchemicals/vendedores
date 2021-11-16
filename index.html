@@ -10,7 +10,7 @@
 </head>
 <body>
   <main>
-    <form method="POST" id="send-order" class="send-order--form">
+    <form id="send-order-form" class="send-order--form">
       <label for="category">Categoría:</label>
       <select class="inputs-container--category" name="category" id="category">
         <option value selected disabled hidden>Seleccionar...</option>
@@ -32,7 +32,7 @@
       <ul id="total-order">        
       </ul>
 
-      <button type="submit">Enviar Pedido</button>
+      <button type="submit" id="send-ws-message">Enviar Pedido</button>
     </form>
   </main>
 </body>
