@@ -55,16 +55,16 @@ export function setButtons(totalOrder, products) {
 
   //print product on ul
   function printProduct(product, ul = DOM.get("#total-order")) {
-    const { name, key, amount } = product
+    const { name, keyName, amount } = product
     const ulChildren = [...ul.children]
-    const liIndex = ulChildren.findIndex(li => li.dataset.key === key)
+    const liIndex = ulChildren.findIndex(li => li.dataset.keyName === keyName)
     
     const li = ulChildren[liIndex] ?? DOM.create("li")
     const innerText = `${name}: ${amount}`
     li.innerText = innerText
 
     if(liIndex === -1) {
-      li.dataset.key = key
+      li.dataset.keyName = keyName
       ul.appendChild(li)
     }
   }
@@ -80,13 +80,15 @@ export function setButtons(totalOrder, products) {
     const currentOrder = products[category].slice(from, to + 1)
     
     currentOrder.forEach((product) => {
-      const productExist = totalOrder.some(element => element.keyName === product.keyName)
-      
-      (productExist) 
-        ? product.amount += amount
-        : product.amount = amount;
+      const productIndex = totalOrder.findIndex(element => element.keyName === product.keyName)
+      const productExist = (productIndex > -1)
 
-      totalOrder.push(product)
+      if(productExist) totalOrder[productIndex].amount += amount
+      else {
+        product.amount = amount
+        totalOrder.push(product)
+      }
+
       printProduct(product)
     }) 
   })
@@ -94,11 +96,13 @@ export function setButtons(totalOrder, products) {
 
 export function setUlListener(totalOrder) {
   const totalOrderUl = DOM.get("ul#total-order")
+
   totalOrderUl.addEventListener("click", ({target}) => {
     const isTargetLi = target.tagName == "LI"
     if(isTargetLi == false) return;
-    
-    
+
+    const productIndex = totalOrder.findIndex(product => product.keyName === target.dataset.keyName)
+    totalOrder.splice(productIndex, 1)
 
     DOM.removeElement(target)
   })
