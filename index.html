@@ -11,6 +11,20 @@
 <body>
   <main>
     <form id="send-order-form" class="send-order--form">
+      <label for="seller">Vendedor:</label>
+      <select class="inputs-container--seller" name="seller" id="seller">
+        <option value selected disabled hidden>Seleccionar...</option>
+      </select>
+
+      <label for="client">Cliente:</label>
+      <textarea 
+        name="client" 
+        id="client" 
+        cols="20" 
+        rows="5" 
+        placeholder="Nombre:
+Dirección:"></textarea>
+
       <label for="category">Categoría:</label>
       <select class="inputs-container--category" name="category" id="category">
         <option value selected disabled hidden>Seleccionar...</option>

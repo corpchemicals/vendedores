@@ -1,5 +1,17 @@
 import DOM from './DOM.mjs'
 
+export function setSellersSelector(sellers) {
+  const sellerSelect = DOM.get("select#seller")
+  
+  const sellersOptions = []
+  for(const seller of sellers) {
+    const option = DOM.createOption(seller)
+    sellersOptions.push(option)
+  }
+
+  sellerSelect.append(...sellersOptions)
+}
+
 export function setSelects(products) {
   const categorySelect = DOM.get("select#category")
   const fromNumberSelect = DOM.get("select#from-number")
@@ -74,7 +86,7 @@ export function setAddButton(totalOrder, products) {
     const liIndex = ulChildren.findIndex(li => li.dataset.keyName === keyName)
     
     const li = ulChildren[liIndex] ?? DOM.create("li")
-    const innerText = `${name}: ${amount}`
+    const innerText = `${keyName.toUpperCase()} - ${name}: ${amount}`
     li.innerText = innerText
 
     if(liIndex === -1) {
@@ -112,15 +124,25 @@ export function setSubmitForm(totalOrder, phoneNumber) {
   const form = document.querySelector("form#send-order-form")
   
   form.addEventListener("submit", ({target}) => {
-    let message = 
-      `Cliente: Marcelo Temporal \nVendedor: 5 \nPedido: \n\n`
+    if(totalOrder.length < 1) return;
 
+    const seller = DOM.get("#seller").value
+    const client = DOM.get("#client").value
+    let message = 
+    `Vendedor: ${seller} \nCliente: ${client} \nPedido: \n\n`
+    
+    let orderPrice = 0
+    
     for(const order of totalOrder) {
-      const { keyName, amount} = order
-      const text = `${keyName.toUpperCase()}: ${amount} unds. \n`
+      const { keyName, amount, uPrice} = order
+      const text = `-${keyName.toUpperCase()}: ${amount} unds. \n`
       message += text
+      orderPrice += amount * uPrice
     }
- 
+
+    const priceMessage = `Precio Total: ${orderPrice.toFixed(2)}$`
+    message += `\n${priceMessage}`
+
     const encodedMessage = encodeURI(message)
     const startedLink = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=`
     const url = `${startedLink}${encodedMessage}`
