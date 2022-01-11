@@ -9,44 +9,96 @@
   <script type="module" src="./index.js"></script>
 </head>
 <body>
+  <header>
+    <h1>Corporación Chemicals</h1>
+  </header>
   <main>
-    <form id="send-order-form" class="send-order--form">
-      <label for="seller">Vendedor:</label>
-      <select class="inputs-container--seller" name="seller" id="seller">
-        <option value selected disabled hidden>Seleccionar...</option>
-      </select>
+    <form id="send-order-form" class="send-order-form" action="#">
+      
+      <div class="form-data-wrapper">
+        <label for="seller">Vendedor</label>
+        <input required name="seller" id="seller" />
+      </div>
+      
+      <section class="form-client-data form-section">
+        <h2>Información del Cliente</h2>
+        <div class="form-data-wrapper">
+          <label for="client-name">Nombre</label>
+          <input required name="client-name" id="client-name">
+        </div>
 
-      <label for="client">Cliente:</label>
-      <textarea 
-        name="client" 
-        id="client" 
-        cols="20" 
-        rows="5" 
-        placeholder="Nombre:
-Dirección:"></textarea>
+        <div class="form-data-wrapper phone-wrapper">
+          <label for="client-phone">Teléfono</label>
+          
+          <footer class="double-input-wrapper">
+            <input 
+              type="tel" 
+              maxlength="4"
+              name="phone-area-code" 
+              id="phone-area-code"
+              placeholder="0414"
+              required
+              onkeyup="if(this.value.length == this.getAttribute('maxlength')) document.querySelector('#client-phone').focus()"
+            />
 
-      <label for="category">Categoría:</label>
-      <select class="inputs-container--category" name="category" id="category">
-        <option value selected disabled hidden>Seleccionar...</option>
-      </select>
+            <input required type="tel" maxlength="7" name="client-phone" id="client-phone" />
+          </footer>
+        </div>
+
+        <div class="form-data-wrapper identification-wrapper">
+          <label for="client-identification">RIF</label>
+
+          <footer class="double-input-wrapper">
+            <select name="identification-type" id="identification-type">
+              <option value="J" selected>J</option>
+              <option value="V">V</option>
+            </select>
+
+            <input required type="number" name="client-identification" id="client-identification" />
+          </footer>
+        </div>
+
+        <div class="form-data-wrapper">
+          <label for="client-address">Dirección</label>
+          <input required type="text" name="client-address" id="client-address">
+        </div>
+      </section>
+<!-- ----------------------------------- -->
+      <section class="form-order form-section">
+        <h2>Pedido</h2>
+          <select 
+            class="inputs-container--category full-select" 
+            name="category" 
+            id="category">
+            <option value selected disabled hidden>Categoría</option>
+          </select>
+      
+        <select 
+          class="inputs-container--from-number full-select" 
+          name="from-number" 
+          id="from-number">
+            <option class="select-default-option" value disabled selected hidden>Desde</option>
+        </select>
+      
+        <select 
+          class="inputs-container--to-number full-select" 
+          name="to-number" 
+          id="to-number">
+            <option class="select-default-option" value disabled selected hidden>Hasta</option>
+        </select>
     
-      <label for="category">Desde:</label>
-      <select class="inputs-container--from-number" name="from-number" id="from-number">
-      </select>
-    
-      <label for="category">Hasta:</label>
-      <select class="inputs-container--to-number" name="to-number" id="to-number">
-      </select>
+        <div class="form-data-wrapper">
+          <label for="amount">Cantidad:</label>
+          <input type="number" id="amount" min="1"/>
+        </div>
 
-      <label for="amount">Cantidad:</label>
-      <input type="number" id="amount" min="1"/>
-
-      <button type="button" id="add-order">Agregar</button>
+        <button type="button" id="add-order" class="form-button add-button">Agregar</button>
+      </section>
       
       <ul id="total-order">        
       </ul>
 
-      <button type="submit" id="send-ws-message">Enviar Pedido</button>
+      <button type="submit" id="send-ws-message" class="form-button send-button">Enviar Pedido</button>
     </form>
   </main>
 </body>

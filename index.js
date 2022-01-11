@@ -1,5 +1,4 @@
-import { setSelects, setAddButton, setUlListener, setSubmitForm, setSellersSelector } from './modules/setForm.mjs'
-import sellers from './data/sellers.mjs'
+import { setSelects, setAddButton, setUlListener, setSubmitForm } from './modules/setForm.mjs'
 
 const productsURL = 'https://raw.githubusercontent.com/marcebollin/chemicals-json-products/main/products.json' 
 
@@ -10,7 +9,6 @@ fetch(productsURL)
   const phoneNumber = '+584244044072'
 
   //Set form
-  setSellersSelector(sellers)
   setSelects(products) 
   setAddButton(totalOrder, products)
   setUlListener(totalOrder)

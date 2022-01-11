@@ -1,15 +1,92 @@
+:root {
+  --white: hsl(0, 100%, 99%);
+  --gray: hsla(0, 0%, 80%, .3);
+  --dark-gray: hsla(0, 0%, 30%, .5);
+  --focused-dark-gray: hsl(0, 0%, 10%);
+}
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 
+main {
+  background-color: var(--white);
+  width: 100%;
+}
+
 form {
   display: flex;
   flex-direction: column;
-  padding: 200px;
+  gap: 10px;
+  padding: 20px;
 }
 
-form select {
-  width: 200px;
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-data-wrapper, .full-select {
+  padding: 15px 20px;
+  border-radius: 20px;
+  background-color: var(--gray);
+}
+
+.form-data-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-data-wrapper label {
+  width: 100%;
+  font-size: 1.1rem;
+}
+
+.form-data-wrapper > input, .double-input-wrapper > input, .double-input-wrapper > select { 
+  font-size: 1.2rem;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid var(--dark-gray);
+  background-color: transparent;
+}
+
+.form-data-wrapper input:focus {
+  outline: none;
+  border-color: var(--focused-dark-gray);
+}
+
+.double-input-wrapper {
+  display: grid;
+  width: 100%;
+  gap: 10px;
+}
+
+.phone-wrapper .double-input-wrapper {
+  grid-template-columns: 65px 1fr;
+}
+
+.identification-wrapper .double-input-wrapper {
+  grid-template-columns: 40px 1fr;
+}
+
+.double-input-wrapper input:last-child {
+  width: 100%;
+}
+
+
+.form-client-data {
+  margin: 40px 0;
+} 
+
+select {
+  border: none;
+}
+
+textarea {
+  width: 100%;
+  padding: 5px;
 }

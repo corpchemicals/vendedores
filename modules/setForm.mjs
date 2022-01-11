@@ -1,17 +1,5 @@
 import DOM from './DOM.mjs'
 
-export function setSellersSelector(sellers) {
-  const sellerSelect = DOM.get("select#seller")
-  
-  const sellersOptions = []
-  for(const seller of sellers) {
-    const option = DOM.createOption(seller)
-    sellersOptions.push(option)
-  }
-
-  sellerSelect.append(...sellersOptions)
-}
-
 export function setSelects(products) {
   const categorySelect = DOM.get("select#category")
   const fromNumberSelect = DOM.get("select#from-number")
@@ -123,13 +111,26 @@ export function setAddButton(totalOrder, products) {
 export function setSubmitForm(totalOrder, phoneNumber) {
   const form = document.querySelector("form#send-order-form")
   
-  form.addEventListener("submit", ({target}) => {
-    if(totalOrder.length < 1) return;
+  form.addEventListener("submit", (ev) => {
+    if(totalOrder.length < 1)  {
+      ev.preventDefault();
+      return; 
+    }
+
+    // Replace for sweetAlert
+    alert("Seguro que quieres enviar el pedido?")
 
     const seller = DOM.get("#seller").value
-    const client = DOM.get("#client").value
+
+    const client = {
+      name: DOM.get("#client-name").value, 
+      phone: DOM.get("#phone-area-code").value +  "-" + DOM.get("#client-phone").value,
+      id: DOM.get("#identification-type").value + "-" + DOM.get("#client-identification").value,
+      address: DOM.get("#client-address").value
+    }
+
     let message = 
-    `Vendedor: ${seller} \nCliente: ${client} \nPedido: \n\n`
+    `Vendedor: ${seller} \nCliente: ${client.name} \nTeléfono: ${client.phone} \nIdentificación: ${client.id} \nDirección: ${client.address}\nPedido: \n\n`
     
     let orderPrice = 0
     
