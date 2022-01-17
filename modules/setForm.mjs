@@ -54,28 +54,38 @@ export function setUlListener(totalOrder) {
   const totalOrderUl = DOM.get("ul#total-order")
   
   totalOrderUl.addEventListener("click", ({target}) => {
-    const isTargetLi = target.tagName == "LI"
-    if(isTargetLi == false) return;
+    const isTargetTrashIcon = target.tagName == "IMG" //for icon
+    if(isTargetTrashIcon == false) return;
+    const productElement = target.parentNode
     
-    const productIndex = totalOrder.findIndex(product => product.keyName === target.dataset.keyName)
+    const productIndex = 
+      totalOrder.findIndex(product => product.keyName === productElement.dataset.keyName)
     totalOrder.splice(productIndex, 1)
     
-    DOM.removeElement(target)
+    DOM.removeElement(productElement)
   })
 }
 
 export function setAddButton(totalOrder, products) {
   const addOrderBtt = DOM.get("button#add-order")
+  let totalPrice = 0
 
   //print product on ul
   function printProduct(product, ul = DOM.get("#total-order")) {
-    const { name, keyName, amount } = product
+    const { name, keyName, amount, uPrice } = product
     const ulChildren = [...ul.children]
     const liIndex = ulChildren.findIndex(li => li.dataset.keyName === keyName)
-    
+    const orderPrice = amount * uPrice
+    totalPrice += orderPrice
+
     const li = ulChildren[liIndex] ?? DOM.create("li")
-    const innerText = `${keyName.toUpperCase()} - ${name}: ${amount}`
-    li.innerText = innerText
+    const innerHTML = 
+      ` <abbr class="listed-product" title="${name}">${keyName}</abbr>
+        : ${amount} unds. <span class="order-price">${orderPrice.toFixed(2)}$<span>
+        <img class="trash-icon" src="/assets/trash-icon.svg" alt="ícono de basura">`
+    li.innerHTML = innerHTML
+
+    document.querySelector("#total-price").innerText = totalPrice.toFixed(2) + "$"
 
     if(liIndex === -1) {
       li.dataset.keyName = keyName

@@ -44,7 +44,7 @@
               placeholder="0414"
               required
               onkeyup="if(this.value.length == this.getAttribute('maxlength')) document.querySelector('#client-phone').focus()"
-            />
+              />
 
             <input required type="tel" maxlength="7" name="client-phone" id="client-phone" />
           </footer>
@@ -100,10 +100,18 @@
         <button type="button" id="add-order" class="form-button add-button">Agregar</button>
       </section>
       
-      <ul id="total-order">        
-      </ul>
+      <section class="your-order">
+        <h2>Resumen</h2>
+        <ol id="total-order">        
+        </ol>
+        <footer>
+          <p>Total</p>
+          <h3 id="total-price" class="total-price">$ 0</h3>
+        </footer>
+        <button type="submit" id="send-ws-message" class="form-button send-button">Enviar Pedido</button>
+      </section>
 
-      <button type="submit" id="send-ws-message" class="form-button send-button">Enviar Pedido</button>
+
     </form>
   </main>
 </body>

@@ -15,7 +15,6 @@
   box-sizing: border-box;
 }
 
-
 main {
   background-color: var(--white);
   width: 100%;
@@ -24,13 +23,22 @@ main {
 form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 50px;
   padding: 20px;
 }
 
 h1, h2 {
   font-family: var(--principal-font);
   color: var(--dark-blue);
+}
+
+h3, .order-price {
+  color: var(--light-blue);
+}
+
+p {
+  font-family: var(--secondary-font);
+  font-weight: 500;
 }
 
 .form-section {
@@ -44,6 +52,10 @@ h1, h2 {
   padding: 15px 20px;
   border-radius: 20px;
   background-color: var(--gray);
+}
+
+.full-select {
+  padding-right: 50px;
 }
 
 .form-data-wrapper {
@@ -91,9 +103,9 @@ h1, h2 {
   width: 100%;
 }
 
-.form-client-data {
-  margin: 40px 0;
-} 
+input::placeholder {
+  opacity: 0.9
+}
 
 select {
   -webkit-appearance: none;
@@ -124,6 +136,66 @@ button {
   background-color: var(--light-blue);
   color: var(--white);
   font-size: 1.3rem;
-  padding: 15px 20px;
+  padding: 13px 20px;
   font-family: var(--principal-font);
+  max-width: 250px;
+  width: 200px;
+}
+
+.add-button {
+  margin: 0 auto;
+}
+
+abbr.listed-product {
+  text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 1px dashed #333333;
+  padding: 2px 0px;
+}
+
+.your-order {
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  padding: 20px;
+  gap: 30px;
+  background-color: var(--gray);
+}
+
+.your-order h2 {
+  font-size: 1.6rem;
+  font-family: var(--principal-font);
+}
+
+.your-order > ol {
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
+  gap: 12px;
+  list-style: decimal;
+  list-style-position: inside;
+}
+
+.your-order > ol > li {
+  position: relative;
+  font-family: var(--secondary-font);
+  padding-right: 30px;
+  line-height: 1.7rem;
+}
+
+.trash-icon {
+  position: absolute;
+  width: 20px;
+  aspect-ratio: 1 / 1;
+  top: 50%;
+  left: 90%;
+  transform: translateY(-50%);
+}
+
+.your-order footer h3 {
+  font-size: 1.4rem;
+}
+
+.your-order button {
+  align-self: center;
 }
