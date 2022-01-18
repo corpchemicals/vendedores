@@ -88,7 +88,7 @@ export function setAddButton(totalOrder, products) {
     const innerHTML = 
     ` <abbr class="listed-product" title="${name}" tabindex="0">${keyName}</abbr>
     : ${amount} unds. <span class="order-price">${orderPrice.toFixed(2)}$</span>
-    <img class="trash-icon" src="/assets/trash-icon.svg" alt="ícono de basura">`
+    <img class="trash-icon" src="../assets/trash-icon.svg" alt="ícono de basura">`
     li.innerHTML = innerHTML
     
     if(liIndex === -1) {
