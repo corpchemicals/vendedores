@@ -112,7 +112,7 @@ select {
   -moz-appearance: none;
   border: none;
   outline: none;
-  background-image: url('/assets/arrow-double-down.svg');
+  background-image: url('../assets/arrow-double-down.svg');
   background-repeat: no-repeat;
   background-size: 15px;
   background-position: 90% center;
@@ -185,11 +185,12 @@ abbr.listed-product {
 
 .trash-icon {
   position: absolute;
-  width: 20px;
+  width: 23px;
   aspect-ratio: 1 / 1;
   top: 50%;
   left: 90%;
   transform: translateY(-50%);
+  cursor: pointer;
 }
 
 .your-order footer h3 {
@@ -198,4 +199,28 @@ abbr.listed-product {
 
 .your-order button {
   align-self: center;
+}
+
+abbr[title] {
+  position: relative;
+}
+
+abbr[title]:hover::after,
+abbr[title]:focus::after {
+  content: attr(title);
+  
+  /* position tooltip like the native one */
+  position: absolute;
+  left: 0;
+  bottom: -30px;
+  width: auto;
+  white-space: nowrap;
+  
+  /* style tooltip */
+  background-color: var(--focused-dark-gray);
+  color: #fff;
+  border-radius: 3px;
+  box-shadow: 1px 1px 5px 0 rgba(0,0,0,0.4);
+  font-size: .8rem;
+  padding: 3px 5px;
 }

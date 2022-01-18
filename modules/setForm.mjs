@@ -51,49 +51,56 @@ export function setSelects(products) {
 }
 
 export function setUlListener(totalOrder) {
-  const totalOrderUl = DOM.get("ul#total-order")
+  const totalOrderUl = DOM.get("#total-order")
   
   totalOrderUl.addEventListener("click", ({target}) => {
     const isTargetTrashIcon = target.tagName == "IMG" //for icon
     if(isTargetTrashIcon == false) return;
-    const productElement = target.parentNode
-    
+    const productElement = target.parentElement
+    console.log(productElement);
     const productIndex = 
       totalOrder.findIndex(product => product.keyName === productElement.dataset.keyName)
-    totalOrder.splice(productIndex, 1)
     
+    const { uPrice, amount } = totalOrder[productIndex]
+    const priceToRemove = uPrice * amount
+    const totalPriceElement = DOM.get("#total-price")
+    const newTotalPrice = +totalPriceElement.dataset.totalPrice - priceToRemove 
+    totalPriceElement.dataset.totalPrice = newTotalPrice
+    totalPriceElement.innerText = newTotalPrice.toFixed(2) + "$"
+
+    totalOrder.splice(productIndex, 1)
+
     DOM.removeElement(productElement)
   })
 }
 
 export function setAddButton(totalOrder, products) {
   const addOrderBtt = DOM.get("button#add-order")
-  let totalPrice = 0
-
+  
   //print product on ul
   function printProduct(product, ul = DOM.get("#total-order")) {
     const { name, keyName, amount, uPrice } = product
     const ulChildren = [...ul.children]
     const liIndex = ulChildren.findIndex(li => li.dataset.keyName === keyName)
     const orderPrice = amount * uPrice
-    totalPrice += orderPrice
-
+    
     const li = ulChildren[liIndex] ?? DOM.create("li")
     const innerHTML = 
-      ` <abbr class="listed-product" title="${name}">${keyName}</abbr>
-        : ${amount} unds. <span class="order-price">${orderPrice.toFixed(2)}$<span>
-        <img class="trash-icon" src="/assets/trash-icon.svg" alt="ícono de basura">`
+    ` <abbr class="listed-product" title="${name}" tabindex="0">${keyName}</abbr>
+    : ${amount} unds. <span class="order-price">${orderPrice.toFixed(2)}$</span>
+    <img class="trash-icon" src="/assets/trash-icon.svg" alt="ícono de basura">`
     li.innerHTML = innerHTML
-
-    document.querySelector("#total-price").innerText = totalPrice.toFixed(2) + "$"
-
+    
     if(liIndex === -1) {
       li.dataset.keyName = keyName
       ul.appendChild(li)
     }
+    
+    return orderPrice
   }
   
   addOrderBtt.addEventListener("click", () => {
+    let totalPrice = 0
     const amount = Number(DOM.get("input#amount").value)
     if(amount <= 0) return;
     
@@ -113,8 +120,12 @@ export function setAddButton(totalOrder, products) {
         totalOrder.push(product)
       }
 
-      printProduct(product)
+      totalPrice += printProduct(product)
     }) 
+
+    const totalPriceElement = document.querySelector("#total-price")
+    totalPriceElement.dataset.totalPrice = totalPrice 
+    totalPriceElement.innerText = totalPrice.toFixed(2) + "$"
   })
 }
 
