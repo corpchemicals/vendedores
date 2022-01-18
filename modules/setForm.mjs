@@ -65,8 +65,9 @@ export function setUlListener(totalOrder) {
     const priceToRemove = uPrice * amount
     const totalPriceElement = DOM.get("#total-price")
     const newTotalPrice = +totalPriceElement.dataset.totalPrice - priceToRemove 
+
     totalPriceElement.dataset.totalPrice = newTotalPrice
-    totalPriceElement.innerText = newTotalPrice.toFixed(2) + "$"
+    totalPriceElement.innerText = (newTotalPrice >= 0) ? newTotalPrice.toFixed(2) + "$" : "0$"
 
     totalOrder.splice(productIndex, 1)
 
