@@ -1,4 +1,4 @@
-import DOM from './DOM.mjs'
+import { DOM } from './DOM.mjs'
 
 export function setSelects(products) {
   const categorySelect = DOM.get("select#category")
@@ -57,7 +57,7 @@ export function setUlListener(totalOrder) {
     const isTargetTrashIcon = target.tagName == "IMG" //for icon
     if(isTargetTrashIcon == false) return;
     const productElement = target.parentElement
-    console.log(productElement);
+
     const productIndex = 
       totalOrder.findIndex(product => product.keyName === productElement.dataset.keyName)
     

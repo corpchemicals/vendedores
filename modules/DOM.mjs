@@ -1,4 +1,4 @@
-export default class DOM {
+export class DOM {
   static create(name) {
     return document.createElement(name)
   }

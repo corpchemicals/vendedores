@@ -9,10 +9,22 @@
   --secondary-font: 'Lora', serif;
 }
 
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+}
+
+header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: var(--white);
+}
+
+.principal-logo {
+  width: 120px;
 }
 
 main {
@@ -48,6 +60,8 @@ p {
 }
 
 .form-data-wrapper, .full-select {
+  min-height: 60px;
+  max-height: 86px;
   font-size: 1.2rem;
   padding: 15px 20px;
   border-radius: 20px;
@@ -223,4 +237,62 @@ abbr[title]:focus::after {
   box-shadow: 1px 1px 5px 0 rgba(0,0,0,0.4);
   font-size: .8rem;
   padding: 3px 5px;
+}
+
+.toggle {
+  position: relative;
+  border-radius: 50px;
+  aspect-ratio: 2 / 1.1;
+  border: 2px solid transparent;
+  width: 70px;
+}
+
+.toggle input {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+.toggle-item {
+  display: inline-block;
+  position: absolute;
+  width: 45%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  top: 50%;
+  left: 3px;
+  transform: translateY(-50%);
+  transition: transform .3s ease-in-out;
+  background-color: var(--white);
+}
+
+.toggle input:checked + .toggle-item {
+  transform: translate(100%, -50%);
+}
+
+.toggle-message {
+  position: absolute;
+  white-space: nowrap;
+  color: var(--dark-gray);
+  font-family: var(--principal-font);
+  font-size: 1.1rem;
+  left: calc(100% + 10px);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.toggle input:checked ~ .toggle-message {
+  color: var(--light-blue);  
+}
+
+.off-color {
+  background-color: var(--dark-gray);
+}
+
+.on-color {
+  background-color: var(--light-blue);
+}
+
+.displayNone {
+  display: none;
 }

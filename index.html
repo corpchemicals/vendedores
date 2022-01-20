@@ -15,7 +15,7 @@
 </head>
 <body>
   <header>
-    <h1>Corporación Chemicals</h1>
+    <img src="./assets/chemicals-logo.png" alt="Chemicals Logo" class="principal-logo">
   </header>
   <main>
     <form id="send-order-form" class="send-order-form" action="#">
@@ -27,12 +27,21 @@
       
       <section class="form-client-data form-section">
         <h2>Información del Cliente</h2>
+
+        <section>
+          <div class="toggle off-color">
+            <input id="toggle-client-existence" type="checkbox">
+            <label class="toggle-item" for="toggle-client-existence"></label>
+            <span class="toggle-message">Cliente Existente</span>
+          </div>
+        </section>
+
         <div class="form-data-wrapper">
           <label for="client-name">Nombre</label>
           <input required name="client-name" id="client-name">
         </div>
 
-        <div class="form-data-wrapper phone-wrapper">
+        <div class="form-data-wrapper phone-wrapper new-client-field">
           <label for="client-phone">Teléfono</label>
           
           <footer class="double-input-wrapper">
@@ -50,7 +59,7 @@
           </footer>
         </div>
 
-        <div class="form-data-wrapper identification-wrapper">
+        <div class="form-data-wrapper identification-wrapper new-client-field">
           <label for="client-identification">RIF</label>
 
           <footer class="double-input-wrapper">
@@ -63,7 +72,7 @@
           </footer>
         </div>
 
-        <div class="form-data-wrapper">
+        <div class="form-data-wrapper new-client-field">
           <label for="client-address">Dirección</label>
           <input required type="text" name="client-address" id="client-address">
         </div>
