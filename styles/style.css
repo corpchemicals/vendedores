@@ -61,7 +61,6 @@ p {
 
 .form-data-wrapper, .full-select {
   min-height: 60px;
-  max-height: 86px;
   font-size: 1.2rem;
   padding: 15px 20px;
   border-radius: 20px;
