@@ -1,7 +1,7 @@
 import { setSelects, setAddButton, setUlListener, setSubmitForm } from './modules/setForm.mjs'
 import { DOM } from './modules/DOM.mjs'
 
-const productsURL = 'https://raw.githubusercontent.com/marcebollin/chemicals-json-products/main/products.json' 
+const productsURL = 'https://raw.githubusercontent.com/corpchemicals/products-list/main/products.json' 
 
 fetch(productsURL)
 .then(response => response.json())
