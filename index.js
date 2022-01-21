@@ -18,7 +18,17 @@ fetch(productsURL)
     container.classList.toggle("off-color")
     container.classList.toggle("on-color")
 
-    newClientFields.forEach(field => field.classList.toggle("displayNone"))
+    newClientFields.forEach(field => {
+      const inputs = field.querySelectorAll("input")
+      
+      inputs.forEach(input => {
+        const wasntRemoved = input.hasAttribute("required")
+        if(wasntRemoved) input.removeAttribute("required")
+        else input.required = true
+      })
+
+      field.classList.toggle("displayNone")
+    })
   })
   setSelects(products) 
   setAddButton(totalOrder, products)

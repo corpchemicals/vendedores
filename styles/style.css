@@ -33,9 +33,10 @@ main {
 }
 
 form {
-  display: grid;
-  grid-template: auto auto repeat(3, 1fr) / 1fr;
-  justify-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 40px;
   padding: 20px;
 }

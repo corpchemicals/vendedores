@@ -146,9 +146,9 @@ export function setSubmitForm(totalOrder, phoneNumber) {
 
     const client = {
       name: DOM.get("#client-name").value, 
-      phone: DOM.get("#phone-area-code").value +  "-" + DOM.get("#client-phone").value,
-      id: DOM.get("#identification-type").value + "-" + DOM.get("#client-identification").value,
-      address: DOM.get("#client-address").value
+      phone: DOM.get("#phone-area-code").value +  "-" + DOM.get("#client-phone").value || "----",
+      id: DOM.get("#identification-type").value + "-" + DOM.get("#client-identification").value || "----",
+      address: DOM.get("#client-address").value || "----"
     }
 
     let message = 
