@@ -33,9 +33,10 @@ main {
 }
 
 form {
-  display: flex;
-  flex-direction: column;
-  gap: 50px;
+  display: grid;
+  grid-template: auto auto repeat(3, 1fr) / 1fr;
+  justify-items: center;
+  gap: 40px;
   padding: 20px;
 }
 
@@ -56,11 +57,15 @@ p {
 .form-section {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  align-items: center;
+  width: 100%;
+  gap: 25px;
 }
 
 .form-data-wrapper, .full-select {
   min-height: 60px;
+  max-width: 335px;
+  width: 100%;
   font-size: 1.2rem;
   padding: 15px 20px;
   border-radius: 20px;
@@ -169,6 +174,8 @@ abbr.listed-product {
 .your-order {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  max-width: 335px;
   border-radius: 20px;
   padding: 20px;
   gap: 30px;
@@ -236,6 +243,11 @@ abbr[title]:focus::after {
   box-shadow: 1px 1px 5px 0 rgba(0,0,0,0.4);
   font-size: .8rem;
   padding: 3px 5px;
+}
+
+.toggle-existence-section {
+  width: 100%;
+  max-width: 335px;
 }
 
 .toggle {
