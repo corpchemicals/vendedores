@@ -34,16 +34,26 @@ main {
 
 form {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
   gap: 40px;
   padding: 20px;
+}
+
+.header-form {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.header-form .seller-wrapper {
+  min-width: 280px;
 }
 
 h1, h2 {
   font-family: var(--principal-font);
   color: var(--dark-blue);
+  font-size: 2rem;
 }
 
 h3, .order-price {
@@ -60,6 +70,7 @@ p {
   flex-direction: column;
   align-items: center;
   width: 100%;
+  max-width: 340px;
   gap: 25px;
 }
 
