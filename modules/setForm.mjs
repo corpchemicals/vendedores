@@ -96,12 +96,9 @@ export function setAddButton(totalOrder, products) {
       li.dataset.keyName = keyName
       ul.appendChild(li)
     }
-    
-    return orderPrice
   }
   
   addOrderBtt.addEventListener("click", () => {
-    let totalPrice = 0
     const amount = Number(DOM.get("input#amount").value)
     if(amount <= 0) return;
     
@@ -114,15 +111,20 @@ export function setAddButton(totalOrder, products) {
     currentOrder.forEach((product) => {
       const productIndex = totalOrder.findIndex(element => element.keyName === product.keyName)
       const productExist = (productIndex > -1)
-
+      
       if(productExist) totalOrder[productIndex].amount += amount
       else {
         product.amount = amount
         totalOrder.push(product)
       }
-
-      totalPrice += printProduct(product)
+      
+      printProduct(product)
     }) 
+
+    let totalPrice = totalOrder.reduce((acc, obj) => {
+      const {amount, uPrice} = obj
+      return acc + (amount * uPrice)
+    }, 0);
 
     const totalPriceElement = document.querySelector("#total-price")
     totalPriceElement.dataset.totalPrice = totalPrice 
