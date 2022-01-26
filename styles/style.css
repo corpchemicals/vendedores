@@ -56,7 +56,7 @@ h1, h2 {
   font-size: 2rem;
 }
 
-h3, .order-price {
+h3, .product-price {
   color: var(--light-blue);
 }
 
@@ -213,6 +213,10 @@ abbr.listed-product {
   font-family: var(--secondary-font);
   padding-right: 30px;
   line-height: 1.7rem;
+}
+
+.order-product-info {
+  display: inline;
 }
 
 .trash-icon {

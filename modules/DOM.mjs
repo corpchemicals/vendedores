@@ -3,8 +3,8 @@ export class DOM {
     return document.createElement(name)
   }
 
-  static get(key, from) {
-    return from?.querySelector(key) ?? document.querySelector(key)
+  static get(key) {
+    return document.querySelector(key)
   }
 
   static createOption(value, innerText = value) {
