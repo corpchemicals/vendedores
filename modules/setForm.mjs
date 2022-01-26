@@ -1,55 +1,5 @@
 import { DOM } from './DOM.mjs'
 
-export function setSelects(products) {
-  const categorySelect = DOM.get("select#category")
-  const fromNumberSelect = DOM.get("select#from-number")
-  const toNumberSelect = DOM.get("select#to-number")
-
-  //fill number selects
-  function fillSelect(select, data, index = 0) {
-    const selectOptions = []
-    for(const { number, name } of data) {
-      const option = DOM.createOption(index, `${number}: ${name}`)
-      selectOptions.push(option)
-      index++
-    }
-    select.append(...selectOptions)
-  }
-
-  const categoryOptions = []
-
-  //fill category select
-  for(const category in products) {
-    const option = DOM.createOption(category, category.toUpperCase())
-    categoryOptions.push(option)
-  } 
-
-  categorySelect.append(...categoryOptions)
-
-  //Event listener when category is changing
-  categorySelect.addEventListener("change", ({target}) => {
-    DOM.removeAllChilds(fromNumberSelect)
-    DOM.removeAllChilds(toNumberSelect)
-
-    const category = target.value
-    fillSelect(fromNumberSelect, products[category])
-    fillSelect(toNumberSelect, products[category])
-  })
-
-  //Event listener when fromNumber is changing
-  fromNumberSelect.addEventListener("change", ({target}) => {
-    DOM.removeAllChilds(toNumberSelect)
-
-    const category = categorySelect.value
-    const fromNumber = +target.value
-    const productsRemaining = products[category].slice(fromNumber)
-
-    fillSelect(toNumberSelect, productsRemaining, fromNumber)
-  
-    toNumberSelect.value = fromNumber
-  })
-}
-
 export function setUlListener(totalOrder) {
   const totalOrderUl = DOM.get("#total-order")
   
