@@ -1,4 +1,4 @@
-import { setAddButton, setSubmitForm } from './modules/setForm.mjs'
+import { setSubmitForm } from './modules/setForm.mjs'
 import { DOM } from './modules/DOM.mjs'
 class Order {
    constructor() {
@@ -241,14 +241,5 @@ checkClientExistence.addEventListener("change", ({target}) => {
          field.classList.toggle("displayNone")
     })
 })
-const test = new Session()
 
-// fetch(productsURL)
-// .then(response => response.json())
-// .then(products => {
-//     const totalOrder = []
-//     const phoneNumber = '+584244044072'
-
-//     setSubmitForm(totalOrder, phoneNumber)
-// })
-// .catch(e => console.error(e))
+const session = new Session()
