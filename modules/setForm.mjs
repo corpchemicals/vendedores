@@ -1,30 +1,5 @@
 import { DOM } from './DOM.mjs'
 
-export function setUlListener(totalOrder) {
-  const totalOrderUl = DOM.get("#total-order")
-  
-  totalOrderUl.addEventListener("click", ({target}) => {
-    const isTargetTrashIcon = target.tagName == "IMG" //for icon
-    if(isTargetTrashIcon == false) return;
-    const productElement = target.parentElement
-
-    const productIndex = 
-      totalOrder.findIndex(product => product.keyName === productElement.dataset.keyName)
-    
-    const { uPrice, amount } = totalOrder[productIndex]
-    const priceToRemove = uPrice * amount
-    const totalPriceElement = DOM.get("#total-price")
-    const newTotalPrice = +totalPriceElement.dataset.totalPrice - priceToRemove 
-
-    totalPriceElement.dataset.totalPrice = newTotalPrice
-    totalPriceElement.innerText = (newTotalPrice >= 0) ? newTotalPrice.toFixed(2) + "$" : "0$"
-
-    totalOrder.splice(productIndex, 1)
-
-    DOM.removeElement(productElement)
-  })
-}
-
 export function setAddButton(totalOrder, products) {
   const addOrderBtt = DOM.get("button#add-order")
   

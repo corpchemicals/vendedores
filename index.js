@@ -1,9 +1,42 @@
-import { setAddButton, setUlListener, setSubmitForm } from './modules/setForm.mjs'
+import { setAddButton, setSubmitForm } from './modules/setForm.mjs'
 import { DOM } from './modules/DOM.mjs'
-
-const productsURL = 'https://raw.githubusercontent.com/corpchemicals/products-list/main/products.json' 
-
 class Order {
+   constructor() {
+      this.sendPhone = '+584244044072'
+      this.total = []
+      this.#init()
+   }
+
+   #init() {
+      this.#setUlListener()
+   }
+
+   #setUlListener() {
+      const orderUl = DOM.get("#total-order")
+      
+      orderUl.addEventListener("click", ({target}) => {
+        const isTargetTrashIcon = target.tagName == "IMG" //for icon
+        if(isTargetTrashIcon == false) return;
+        const productElement = target.parentElement
+    
+        const productIndex = 
+          this.total.findIndex(product => product.keyName === productElement.dataset.keyName)
+        
+        const { uPrice, amount } = this.order[productIndex]
+        const totalPriceElement = DOM.get("#total-price")
+
+        const priceToRemove = uPrice * amount
+        totalPriceElement.dataset.totalPrice -= priceToRemove
+    
+        totalPriceElement.innerText = totalPriceElement.dataset.totalPrice.toFixed(2) + "$"
+        
+        this.total.splice(productIndex, 1)
+    
+        DOM.removeElement(productElement)
+      })
+    }
+}
+class Session {
    constructor() {
       this.productsURL = 'https://raw.githubusercontent.com/corpchemicals/products-list/main/products.json' 
       this.#init()
@@ -15,7 +48,6 @@ class Order {
    }
 
    async #getProductsFromURL() {
-      //return a promise
       const response = await fetch(this.productsURL)
       return response.json()
    }
@@ -88,6 +120,7 @@ class Order {
    }
 }
 
+
 //Set form
 const checkClientExistence = DOM.get("#toggle-client-existence")
 const newClientFields = document.querySelectorAll(".new-client-field")
@@ -115,9 +148,8 @@ fetch(productsURL)
    const totalOrder = []
    const phoneNumber = '+584244044072'
 
-   const test = new Order()
+   const test = new Session()
    setAddButton(totalOrder, products)
-   setUlListener(totalOrder)
    setSubmitForm(totalOrder, phoneNumber)
 })
 .catch(e => console.error(e))
