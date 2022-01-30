@@ -5,13 +5,13 @@ export class Session {
    constructor() {
       this.productsURL = 'https://raw.githubusercontent.com/corpchemicals/products-list/main/products.json' 
       this.sendPhone = '+584244044072'
+      this.#setClientExistence()
       this.#init()
       this.order = new Order()
    }
       
    async #init() {
       const products = await this.#getProductsFromURL()
-      this.#setClientExistence()
       this.#setSelects(products)
       this.#setAddButton(products)
       this.#setSubmitButton()
