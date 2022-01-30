@@ -11,10 +11,14 @@ export class Session {
    }
       
    async #init() {
-      const products = await this.#getProductsFromURL()
-      this.#setSelects(products)
-      this.#setAddButton(products)
-      this.#setSubmitButton()
+      try {
+         const products = await this.#getProductsFromURL()
+         this.#setSelects(products)
+         this.#setAddButton(products)
+         this.#setSubmitButton()
+      } catch(err) {
+         swal('Ocurrió un error')
+      }
    }
 
    async #getProductsFromURL() {
