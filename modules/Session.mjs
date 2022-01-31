@@ -172,7 +172,7 @@ export class Session {
                const priceMessage = `Precio Total: ${this.order.price.toFixed(2)}$`
                message += `\n${priceMessage}`
             
-               const encodedMessage = encodeURI(message)
+               const encodedMessage = encodeURIComponent(message)
                const startedLink = `https://api.whatsapp.com/send?phone=${this.sendPhone}&text=`
                const url = `${startedLink}${encodedMessage}`
             
