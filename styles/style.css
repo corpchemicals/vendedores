@@ -184,7 +184,7 @@ abbr.listed-product {
   padding: 2px 0px;
 }
 
-.your-order {
+.summary {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -195,12 +195,12 @@ abbr.listed-product {
   background-color: var(--gray);
 }
 
-.your-order h2 {
+.summary h2 {
   font-size: 1.6rem;
   font-family: var(--principal-font);
 }
 
-.your-order > ol {
+.summary > ol {
   display: flex;
   flex-direction: column;
   min-height: 200px;
@@ -209,7 +209,7 @@ abbr.listed-product {
   list-style-position: inside;
 }
 
-.your-order > ol > li {
+.summary > ol > li {
   position: relative;
   font-family: var(--secondary-font);
   padding-right: 30px;
@@ -230,11 +230,11 @@ abbr.listed-product {
   cursor: pointer;
 }
 
-.your-order footer h3 {
+.summary footer h3 {
   font-size: 1.4rem;
 }
 
-.your-order button {
+.summary button {
   align-self: center;
 }
 
