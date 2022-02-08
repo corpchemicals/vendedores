@@ -101,16 +101,17 @@ export class Session {
          const selectOptions = []
          
          if(isCategory) {
-             for(const category in data) {
-                  const option = DOM.createOption(category, category.toUpperCase())
-                  selectOptions.push(option)
-             } 
+            const sortedData = Object.keys({...data}).sort()
+            for(const category of sortedData) {
+               const option = DOM.createOption(category, category.toUpperCase())
+               selectOptions.push(option)
+            } 
          } else {
-             for(const { number, name } of data) {
-                  const option = DOM.createOption(index, `${number}: ${name}`)
-                  selectOptions.push(option)
-                  index++
-             }
+            for(const { number, name } of data) {
+               const option = DOM.createOption(index, `${number}: ${name}`)
+               selectOptions.push(option)
+               index++
+            }
          }
 
          select.append(...selectOptions)
