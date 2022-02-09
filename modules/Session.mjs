@@ -39,10 +39,12 @@ export class Session {
                const inputs = field.querySelectorAll("input")
                
                inputs.forEach(input => {
-                   const wasntRemoved = input.hasAttribute("required")
-                   if(wasntRemoved) input.removeAttribute("required")
-                   else input.required = true
-                   input.value = ""
+                  input.value = ""
+                  if(input.id == 'optional-phone-area-code' || input.id == 'optional-client-phone') return
+                  
+                  const wasntRemoved = input.hasAttribute("required")
+                  if(wasntRemoved) input.removeAttribute("required")
+                  else input.required = true
                })
       
                field.classList.toggle("displayNone")
@@ -159,9 +161,8 @@ export class Session {
                let clientPhone = DOM.get("#client-phone").value
                clientPhone &&= `Teléfono: ${DOM.get("#phone-area-code").value}-${clientPhone}\n`
 
-               const clientPhoneOptional = ''
-               // let clientPhoneOptional = DOM.get("#optional-client-phone").value
-               // clientPhoneOptional &&= `Teléfono2: ${DOM.get("#optional-phone-area-code").value}-${clientPhoneOptional}\n`
+               let clientPhoneOptional = DOM.get("#optional-client-phone").value
+               clientPhoneOptional &&= `Teléfono2: ${DOM.get("#optional-phone-area-code").value}-${clientPhoneOptional}\n`
 
                let clientID = DOM.get("#client-identification").value 
                clientID &&= `Identificación: ${DOM.get("#identification-type").value}-${clientID}\n`
@@ -181,7 +182,7 @@ export class Session {
                }
             
                const priceMessage = `Precio Total: ${this.order.price.toFixed(2)}$`
-               message += `\n${priceMessage}`
+               message += `\n${priceMessage}\n`
             
                const encodedMessage = encodeURIComponent(message)
                const startedLink = `https://api.whatsapp.com/send?phone=${this.sendPhone}&text=`
