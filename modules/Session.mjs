@@ -42,6 +42,7 @@ export class Session {
                    const wasntRemoved = input.hasAttribute("required")
                    if(wasntRemoved) input.removeAttribute("required")
                    else input.required = true
+                   input.value = ""
                })
       
                field.classList.toggle("displayNone")
@@ -131,6 +132,11 @@ export class Session {
       })
    }
 
+   #cleanDataInputs() {
+      const inputs = document.querySelectorAll(".form-data-wrapper input")
+      inputs.forEach(input => input.value = "")
+   }
+
    #setSubmitButton() {
       DOM.get("#send-order-form").addEventListener("submit", (ev) => {
          ev.preventDefault();
@@ -181,6 +187,7 @@ export class Session {
                const url = `${startedLink}${encodedMessage}`
             
                window.open(url, '_blank')
+               this.#cleanDataInputs()
             }
          })
       })
