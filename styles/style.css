@@ -134,6 +134,14 @@ p {
   width: 100%;
 }
 
+.required-label::after {
+  content: '*';
+}
+
+.optional-label-text {
+  font-size: 0.8rem;
+}
+
 input::placeholder {
   opacity: 0.9
 }
