@@ -159,8 +159,9 @@ export class Session {
                let clientPhone = DOM.get("#client-phone").value
                clientPhone &&= `Teléfono: ${DOM.get("#phone-area-code").value}-${clientPhone}\n`
 
-               let clientPhoneOptional = DOM.get("#optional-client-phone").value
-               clientPhoneOptional &&= `Teléfono2: ${DOM.get("#optional-phone-area-code").value}-${clientPhoneOptional}\n`
+               const clientPhoneOptional = ''
+               // let clientPhoneOptional = DOM.get("#optional-client-phone").value
+               // clientPhoneOptional &&= `Teléfono2: ${DOM.get("#optional-phone-area-code").value}-${clientPhoneOptional}\n`
 
                let clientID = DOM.get("#client-identification").value 
                clientID &&= `Identificación: ${DOM.get("#identification-type").value}-${clientID}\n`
