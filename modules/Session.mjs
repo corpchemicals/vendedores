@@ -150,18 +150,21 @@ export class Session {
                const seller = DOM.get("#seller").value
                const clientName = DOM.get("#client-name").value
 
-               let clientPhone = DOM.get("#client-phone").value || ""
+               let clientPhone = DOM.get("#client-phone").value
                clientPhone &&= `Teléfono: ${DOM.get("#phone-area-code").value}-${clientPhone}\n`
 
-               let clientID = DOM.get("#client-identification").value || ""
+               let clientPhoneOptional = DOM.get("#optional-client-phone").value
+               clientPhoneOptional &&= `Teléfono2: ${DOM.get("#optional-phone-area-code").value}-${clientPhoneOptional}\n`
+
+               let clientID = DOM.get("#client-identification").value 
                clientID &&= `Identificación: ${DOM.get("#identification-type").value}-${clientID}\n`
 
-               let clientAddress = DOM.get("#client-address").value || ""
+               let clientAddress = DOM.get("#client-address").value
                clientAddress &&= `Dirección: ${clientAddress}\n`
             
                let message = `Vendedor: ${seller}\n`
                message +=    `Cliente: ${clientName}\n`
-               message +=    clientPhone + clientID + clientAddress
+               message +=    clientPhone + clientPhoneOptional + clientID + clientAddress
                message +=    "Pedido: \n\n" 
                
                for(const product of this.order.total) {
