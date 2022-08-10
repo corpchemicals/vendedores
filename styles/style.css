@@ -278,7 +278,8 @@ abbr[title]:focus::after {
 .toggle {
   position: relative;
   border-radius: 50px;
-  aspect-ratio: 2 / 1.1;
+  width: 70px;
+  height: 42px;
   border: 2px solid transparent;
   width: 70px;
 }
@@ -293,12 +294,12 @@ abbr[title]:focus::after {
   display: inline-block;
   position: absolute;
   width: 45%;
-  aspect-ratio: 1 / 1;
+  height: 80%;
   border-radius: 50%;
   top: 50%;
   left: 3px;
   transform: translateY(-50%);
-  transition: transform .3s ease-in-out;
+  transition: transform .2s ease-in-out;
   background-color: var(--white);
 }
 
