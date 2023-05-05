@@ -176,8 +176,8 @@ export class Session {
                message +=    "Pedido: \n\n" 
                
                for(const product of this.order.total) {
-                  const { keyName, amount } = product
-                  const text = `-${keyName.toUpperCase()}: ${amount} unds. \n`
+                  const { keyName, amount, isPacked } = product
+                  const text = `-${keyName.toUpperCase()}: ${amount} ${isPacked ? 'pq' : 'unds'}. \n`
                   message += text
                }
             

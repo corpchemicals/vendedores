@@ -70,14 +70,14 @@ export class Order {
    }
 
    #fillProductListElement(container, product) {
-      const { name, keyName, amount, uPrice } = product
+      const { name, keyName, amount, uPrice, isPacked } = product
       const productPrice = amount * uPrice
       
       // if product list was already included into dom
       const existentPrice = container.querySelector(".product-price")
       if(existentPrice) {
          const existentAmount = container.querySelector(".product-amount")
-         existentAmount.innerText = `: ${amount} unds. `
+         existentAmount.innerText = `: ${amount} ${isPacked ? 'pq' : 'unds'}. `
          existentPrice.innerText = productPrice.toFixed(2) + "$"
          return
       }
@@ -97,7 +97,7 @@ export class Order {
          // span amount tag
       const spanAmount = DOM.create("span")
       spanAmount.classList.add("product-amount")
-      spanAmount.innerText = `: ${amount} unds. `
+      spanAmount.innerText = `: ${amount} ${isPacked ? 'pq' : 'unds'}. `
       p.append(spanAmount)
 
          // span price tag
