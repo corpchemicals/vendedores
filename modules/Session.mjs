@@ -128,7 +128,7 @@ export class Session {
          const category = DOM.get("select#category").value
          const from = Number(DOM.get("select#from-number").value)
          const to = Number(DOM.get("select#to-number").value)
-         
+
          const currentOrder = products[category].slice(from, to + 1)
          this.order.addProducts(currentOrder, amount)
       })
@@ -183,6 +183,8 @@ export class Session {
             
                const priceMessage = `Precio Total: ${this.order.price.toFixed(2)}$`
                message += `\n${priceMessage}\n`
+
+               message += this.order.estoperaMensaje ? `\nEstoperas Aplicaciones:\n${this.order.estoperaMensaje}` : ""
             
                const encodedMessage = encodeURIComponent(message)
                const startedLink = `https://api.whatsapp.com/send?phone=${this.sendPhone}&text=`

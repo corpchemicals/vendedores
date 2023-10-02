@@ -1,9 +1,9 @@
 import { DOM } from './DOM.mjs'
-
 export class Order {
    constructor() {
       this.total = []
       this.price = 0
+      this.estoperaMensaje = ``
       this.#init()
    }
 
@@ -37,7 +37,49 @@ export class Order {
       }
    
    addProducts(products, amount) {
-      products.forEach((product) => {
+      products.forEach((product, index) => {
+         if(index === 0) {
+            console.log(product)
+            if(product.keyName.includes("estn") || product.keyName.includes("estv")) {
+               Swal.fire({
+                  title: `¿Deseas agregar la aplicación a la estopera ${product.keyName.toUpperCase()}?`,
+                  text: `${product.name}`,
+                  icon: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Sí, quiero agregar',
+                  cancelButtonText: 'No la requiero'
+               }).then((result) => {
+                  if (result.isConfirmed) {
+                     Swal.fire({
+                        icon: 'question',
+                        title: `Agrega tu aplicación para la ${product.keyName.toUpperCase()}`,
+                        text: `En el formato Marca - Modelo`,
+                        input: 'text',
+                        inputPlaceholder: 'Ejemplo: Chevrolet - Aveo',
+                        showCancelButton: true,
+                        confirmButtonText: 'Agregar',
+                        cancelButtonText: 'Cancelar',
+                        preConfirm: (text) => {
+                           if (text === '') {
+                              Swal.showValidationMessage('Ingresa la aplicación');
+                           }
+                        }
+                        }).then((result) => {
+                        if (result.isConfirmed) {
+                           Swal.fire(
+                              'Aplicación agregada',
+                              `Su aplicación es: ${result.value}`,
+                              'success'
+                           )
+                           this.estoperaMensaje += `\n${product.keyName.toUpperCase()} ${product.amount} und. | ${result.value}`
+                        }
+                        })
+                  }
+               })
+            }        
+         }
          const productIndex = this.total.findIndex(element => element.keyName === product.keyName)
          const productExist = (productIndex > -1)
          
@@ -53,6 +95,7 @@ export class Order {
          this.price += uPrice * amount
          this.#updateTotalPriceElement()
       }) 
+      console.log(estoperaMensaje)
    }
 
    #printProduct(product) {
